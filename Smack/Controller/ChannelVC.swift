@@ -10,6 +10,9 @@ import UIKit
 
 class ChannelVC: UIViewController {
 
+    //Outlets
+    @IBOutlet weak var loginBtn: UIButton!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
             //size of rear view
@@ -32,4 +35,9 @@ class ChannelVC: UIViewController {
     }
     */
 
+    @IBAction func loginBtnPressed(_ sender: UIButton) {
+        
+        performSegue(withIdentifier: TO_LOGIN, sender: nil)
+        
+    }
 }
