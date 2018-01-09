@@ -15,7 +15,7 @@ class ChatVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
             //buttonAction
-        menuBtn.addTarget(self.revealViewControler(), action: #selector(SWRevealViewControler.revealToggle(_:)), for: .touchUpInside)
+        menuBtn.addTarget(self.revealViewController(), action: #selector(SWRevealViewController.revealToggle(_:)), for: .touchUpInside)
         
             //reveal rear view upon pan or tap
         self.view.addGestureRecognizer(self.revealViewController().panGestureRecognizer())
