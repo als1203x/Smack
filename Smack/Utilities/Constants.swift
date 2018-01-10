@@ -24,7 +24,7 @@ let TO_CHATVC = "ToSW_Rear"
 let TO_CHANNELVC = "ToSW_FRONT"
 let TO_CREATE_ACCOUNT = "ToCreateAccount"
 let UNWIND = "UnwindToChanel"
-
+let TO_AVATAR_PICKER = "ToAvatarPicker"
 
 //User Default
 

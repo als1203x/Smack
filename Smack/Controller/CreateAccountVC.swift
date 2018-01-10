@@ -35,6 +35,8 @@ class CreateAccountVC: UIViewController {
     }
     @IBAction func pickAvatarPressed(_ sender: Any) {
         
+        performSegue(withIdentifier: TO_AVATAR_PICKER, sender: nil)
+        
     }
     @IBAction func createAccountPressed(_ sender: UIButton) {
             //guard with , is a where statement
