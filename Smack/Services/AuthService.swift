@@ -136,8 +136,8 @@ class AuthService   {
                 let email = json["email"].stringValue
                 let name = json["name"].stringValue
                 
-                UserDataService.instance.setUserData(id: id, avatarColor: color, avatarName: avatarName, email: email, name: name)
-            }else   {
+                UserDataService.instance.setUserData(id: id, color: color, avatarName: avatarName, email: email, name: name)
+                }else   {
                 completion(false)
                 debugPrint(response.result.error as Any)
             }

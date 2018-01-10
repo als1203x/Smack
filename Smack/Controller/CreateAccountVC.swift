@@ -14,7 +14,8 @@ class CreateAccountVC: UIViewController {
     @IBOutlet weak var usernameTxt: UITextField!
     @IBOutlet weak var emailTxt: UITextField!
     @IBOutlet weak var passwordTxt: UITextField!
-    @IBOutlet weak var userImage: UIButton!
+    @IBOutlet weak var userImg: UIImageView!
+    
     
     //Variables
     var avatarName = "profileDefault"
@@ -22,8 +23,13 @@ class CreateAccountVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        if UserDataService.instance.avatarName != ""    {
+            userImg.image = UIImage(named: UserDataService.instance.avatarName)
+            avatarName = UserDataService.instance.avatarName
+        }
     }
 
     @IBAction func closePressed(_ sender: UIButton) {

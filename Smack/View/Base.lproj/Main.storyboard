@@ -422,7 +422,7 @@
                     <connections>
                         <outlet property="emailTxt" destination="kSw-EB-4yi" id="Xgn-vO-qLY"/>
                         <outlet property="passwordTxt" destination="NoW-DU-ysj" id="9JI-7w-PXI"/>
-                        <outlet property="userImage" destination="Vsw-zp-beb" id="zcF-FA-USl"/>
+                        <outlet property="userImg" destination="EbZ-Bj-uej" id="AsN-L8-mLm"/>
                         <outlet property="usernameTxt" destination="yWK-hB-bH0" id="lps-5g-vdH"/>
                         <segue destination="hVC-gN-9d1" kind="unwind" identifier="UnwindToChannel" unwindAction="prepareForUnwindWithSegue:" id="VKk-gf-o38"/>
                         <segue destination="TSd-4x-Ggg" kind="show" identifier="ToAvatarPicker" id="63W-Q5-c6v"/>
