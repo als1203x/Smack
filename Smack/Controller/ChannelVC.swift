@@ -22,22 +22,24 @@ class ChannelVC: UIViewController {
         super.viewDidLoad()
             //size of rear view
         self.revealViewController().rearViewRevealWidth = self.view.frame.size.width - 60
-        
+            // react to specfic notif
         NotificationCenter.default.addObserver(self, selector: #selector(ChannelVC.userDataDidChange(_:)), name: NOTIF_USER_DATA_DID_CHANGE, object: nil)
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-
-
     @IBAction func loginBtnPressed(_ sender: UIButton) {
-        
-        performSegue(withIdentifier: TO_LOGIN, sender: nil)
-        
+        if AuthService.instance.isLoggedIn  {
+            //Show profile page
+                //Inistiate VC
+            let profile = ProfileVC()
+                //present as modal
+            profile.modalPresentationStyle = .custom
+            present(profile, animated: true, completion: nil)
+        }else   {
+            performSegue(withIdentifier: TO_LOGIN, sender: nil)
+        }
     }
     
+    //MARK: Method called by 
     @objc func userDataDidChange( _ notif: Notification)    {
         if AuthService.instance.isLoggedIn  {
             loginBtn.setTitle(UserDataService.instance.name, for: .normal)

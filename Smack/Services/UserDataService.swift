@@ -38,7 +38,7 @@ class UserDataService   {
             //items in element to skip
         let skipped = CharacterSet(charactersIn: "[], ")
         let comma = CharacterSet(charactersIn: ",")
-        scanner.characterToBeSkipped = skipped
+        scanner.charactersToBeSkipped = skipped
         
         var r, g, b, a : NSString?
         scanner.scanUpToCharacters(from: comma, into: &r)
@@ -65,6 +65,15 @@ class UserDataService   {
     }
     
     
-    
+    func logoutUser()   {
+        id = ""
+        avatarName = ""
+        avatarColor = ""
+        email = ""
+        name = ""
+        AuthService.instance.isLoggedIn = false
+        AuthService.instance.userEmail = ""
+        AuthService.instance.authToken = ""
+    }
     
 }
