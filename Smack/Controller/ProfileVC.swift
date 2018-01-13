@@ -35,8 +35,8 @@ class ProfileVC: UIViewController {
     }
  
     func setUpView()    {
-        userName = UserDataService.instance.name
-        userEmail = UserDataService.instance.email
+        userName.text = UserDataService.instance.name
+        userEmail.text = UserDataService.instance.email
         userImg.image = UIImage(named: UserDataService.instance.avatarName)
         userImg.backgroundColor = UserDataService.instance.returnUIColor(components: UserDataService.instance.avatarColor)
     

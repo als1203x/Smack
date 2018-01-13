@@ -119,7 +119,6 @@ class AuthService   {
         ]
         
        
-        
         Alamofire.request(URL_USER_ADD, method: .post, parameters: body, encoding: JSONEncoding.default, headers: BEARER_HEADER).responseJSON  {
             (response) in
             
@@ -133,7 +132,6 @@ class AuthService   {
                 debugPrint(response.result.error as Any)
             }
         }
-    
     }
     
     
