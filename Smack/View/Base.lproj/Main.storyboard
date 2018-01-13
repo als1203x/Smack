@@ -224,6 +224,9 @@
                                         <real key="value" value="7"/>
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="loginPressed:" destination="jd3-rc-0KW" eventType="touchUpInside" id="Q42-me-HKG"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cSd-6M-RfZ">
                                 <rect key="frame" x="62" y="336" width="250" height="30"/>
@@ -239,6 +242,10 @@
                                     <action selector="createAccountPressed:" destination="jd3-rc-0KW" eventType="touchUpInside" id="T7c-4f-cBY"/>
                                 </connections>
                             </button>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="bj2-ab-V1D">
+                                <rect key="frame" x="169" y="215" width="37" height="37"/>
+                                <color key="color" red="0.25882352939999997" green="0.3294117647" blue="0.72549019609999998" alpha="1" colorSpace="calibratedRGB"/>
+                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
@@ -246,8 +253,10 @@
                             <constraint firstItem="cSd-6M-RfZ" firstAttribute="centerX" secondItem="ZuO-b4-uBS" secondAttribute="centerX" id="0Ew-aP-fzj"/>
                             <constraint firstItem="qXc-Im-rbI" firstAttribute="top" secondItem="eqf-xk-yU1" secondAttribute="bottom" constant="40" id="2kq-pZ-DUf"/>
                             <constraint firstItem="cSd-6M-RfZ" firstAttribute="top" secondItem="qXc-Im-rbI" secondAttribute="bottom" id="5FO-9q-AiX"/>
+                            <constraint firstItem="bj2-ab-V1D" firstAttribute="centerX" secondItem="ZuO-b4-uBS" secondAttribute="centerX" id="6Yc-Fw-VCe"/>
                             <constraint firstItem="DFt-cd-UF4" firstAttribute="top" secondItem="8xQ-zI-t2B" secondAttribute="top" id="BSq-Ha-LDg"/>
                             <constraint firstItem="ywI-ZN-KWF" firstAttribute="centerX" secondItem="ZuO-b4-uBS" secondAttribute="centerX" id="NqO-Cd-flq"/>
+                            <constraint firstItem="bj2-ab-V1D" firstAttribute="centerY" secondItem="ZuO-b4-uBS" secondAttribute="centerY" constant="-100" id="cU2-9U-Ve0"/>
                             <constraint firstItem="eqf-xk-yU1" firstAttribute="top" secondItem="ywI-ZN-KWF" secondAttribute="bottom" constant="40" id="n6W-X4-100"/>
                             <constraint firstItem="qXc-Im-rbI" firstAttribute="centerX" secondItem="ZuO-b4-uBS" secondAttribute="centerX" id="qHQ-c5-57Y"/>
                             <constraint firstItem="eqf-xk-yU1" firstAttribute="centerX" secondItem="ZuO-b4-uBS" secondAttribute="centerX" id="xMx-Zt-NY8"/>
@@ -256,6 +265,9 @@
                         <viewLayoutGuide key="safeArea" id="8xQ-zI-t2B"/>
                     </view>
                     <connections>
+                        <outlet property="passwordTxt" destination="JpU-wv-Iv6" id="ZVB-Ah-cNc"/>
+                        <outlet property="spinner" destination="bj2-ab-V1D" id="53x-Ih-WBA"/>
+                        <outlet property="userEmailTxt" destination="c1i-ev-1cH" id="zow-jZ-0bB"/>
                         <segue destination="7qr-NN-I1i" kind="show" identifier="ToCreateAccount" id="5R6-bh-eUa"/>
                     </connections>
                 </viewController>
