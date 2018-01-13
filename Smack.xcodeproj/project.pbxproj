@@ -29,6 +29,9 @@
 		2BEEB585200A51E80086F1AE /* MessageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BEEB584200A51E80086F1AE /* MessageService.swift */; };
 		2BEEB58A200A535B0086F1AE /* Channel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BEEB589200A535B0086F1AE /* Channel.swift */; };
 		2BEEB58C200A75C10086F1AE /* ChannelCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BEEB58B200A75C10086F1AE /* ChannelCell.swift */; };
+		2BEEB58F200A7C690086F1AE /* AddChannelVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BEEB58D200A7C690086F1AE /* AddChannelVC.swift */; };
+		2BEEB590200A7C690086F1AE /* AddChannelVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2BEEB58E200A7C690086F1AE /* AddChannelVC.xib */; };
+		2BEEB592200AA9320086F1AE /* SocketService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BEEB591200AA9320086F1AE /* SocketService.swift */; };
 		90AFB6DF3A4493B31A2C32BF /* Pods_Smack.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 85DDCCD86E5379196F2A2237 /* Pods_Smack.framework */; };
 /* End PBXBuildFile section */
 
@@ -60,6 +63,9 @@
 		2BEEB584200A51E80086F1AE /* MessageService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageService.swift; sourceTree = "<group>"; };
 		2BEEB589200A535B0086F1AE /* Channel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Channel.swift; sourceTree = "<group>"; };
 		2BEEB58B200A75C10086F1AE /* ChannelCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelCell.swift; sourceTree = "<group>"; };
+		2BEEB58D200A7C690086F1AE /* AddChannelVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddChannelVC.swift; sourceTree = "<group>"; };
+		2BEEB58E200A7C690086F1AE /* AddChannelVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AddChannelVC.xib; sourceTree = "<group>"; };
+		2BEEB591200AA9320086F1AE /* SocketService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocketService.swift; sourceTree = "<group>"; };
 		75B5D4C438EABF521A92318A /* Pods-Smack.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Smack.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Smack/Pods-Smack.debug.xcconfig"; sourceTree = "<group>"; };
 		85DDCCD86E5379196F2A2237 /* Pods_Smack.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Smack.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -80,6 +86,7 @@
 			isa = PBXGroup;
 			children = (
 				2B1522972009CA4600A73E3E /* ProfileVC.xib */,
+				2BEEB58E200A7C690086F1AE /* AddChannelVC.xib */,
 			);
 			path = XIBs;
 			sourceTree = "<group>";
@@ -90,6 +97,7 @@
 				2B3425E22005A24900640C68 /* AuthService.swift */,
 				2B3425E6200682CF00640C68 /* UserDataService.swift */,
 				2BEEB584200A51E80086F1AE /* MessageService.swift */,
+				2BEEB591200AA9320086F1AE /* SocketService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -105,7 +113,6 @@
 		2B9131952004506B00AFB2F0 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				2BB32BC12004289A00E63042 /* AppDelegate.swift */,
 				2BB32BC52004289A00E63042 /* Main.storyboard */,
 				2BB32BCA2004289A00E63042 /* LaunchScreen.storyboard */,
 				2B9131A22004687600AFB2F0 /* GradientView.swift */,
@@ -126,6 +133,7 @@
 				2B777F1820052D3300AB2233 /* CreateAccountVC.swift */,
 				2B86D73C2006C87900BABE41 /* AvatarPickerVC.swift */,
 				2B1522962009CA4600A73E3E /* ProfileVC.swift */,
+				2BEEB58D200A7C690086F1AE /* AddChannelVC.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -151,6 +159,7 @@
 		2BB32BC02004289A00E63042 /* Smack */ = {
 			isa = PBXGroup;
 			children = (
+				2BB32BC12004289A00E63042 /* AppDelegate.swift */,
 				2BEEB588200A52FE0086F1AE /* Model */,
 				2B3425E12005A22E00640C68 /* Services */,
 				2B777F132005213D00AB2233 /* Utilities */,
@@ -262,6 +271,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2BEEB590200A7C690086F1AE /* AddChannelVC.xib in Resources */,
 				2BB32BCC2004289A00E63042 /* LaunchScreen.storyboard in Resources */,
 				2B1522992009CA4600A73E3E /* ProfileVC.xib in Resources */,
 				2BB32BC92004289A00E63042 /* Assets.xcassets in Resources */,
@@ -336,6 +346,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2BEEB592200AA9320086F1AE /* SocketService.swift in Sources */,
 				2B91319A200450D000AFB2F0 /* ChannelVC.swift in Sources */,
 				2BEEB58C200A75C10086F1AE /* ChannelCell.swift in Sources */,
 				2B86D73D2006C87900BABE41 /* AvatarPickerVC.swift in Sources */,
@@ -349,6 +360,7 @@
 				2B3425E32005A24900640C68 /* AuthService.swift in Sources */,
 				2B777F1720052B0900AB2233 /* LoginVC.swift in Sources */,
 				2B9131A32004687600AFB2F0 /* GradientView.swift in Sources */,
+				2BEEB58F200A7C690086F1AE /* AddChannelVC.swift in Sources */,
 				2BB32BC22004289A00E63042 /* AppDelegate.swift in Sources */,
 				2B86D73F2006CA8300BABE41 /* AvatarCell.swift in Sources */,
 				2B7F1FB6200449850011B32C /* SWRevealViewController.m in Sources */,
