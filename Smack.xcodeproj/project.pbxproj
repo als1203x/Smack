@@ -34,6 +34,7 @@
 		2BEEB592200AA9320086F1AE /* SocketService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BEEB591200AA9320086F1AE /* SocketService.swift */; };
 		2BEEB594200AE9850086F1AE /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BEEB593200AE9850086F1AE /* Message.swift */; };
 		2BEEB596200AF5520086F1AE /* KeyboardBoundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BEEB595200AF5510086F1AE /* KeyboardBoundView.swift */; };
+		2BEEB598200AFBBD0086F1AE /* MessageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BEEB597200AFBBD0086F1AE /* MessageCell.swift */; };
 		90AFB6DF3A4493B31A2C32BF /* Pods_Smack.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 85DDCCD86E5379196F2A2237 /* Pods_Smack.framework */; };
 /* End PBXBuildFile section */
 
@@ -70,6 +71,7 @@
 		2BEEB591200AA9320086F1AE /* SocketService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocketService.swift; sourceTree = "<group>"; };
 		2BEEB593200AE9850086F1AE /* Message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
 		2BEEB595200AF5510086F1AE /* KeyboardBoundView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyboardBoundView.swift; sourceTree = "<group>"; };
+		2BEEB597200AFBBD0086F1AE /* MessageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageCell.swift; sourceTree = "<group>"; };
 		75B5D4C438EABF521A92318A /* Pods-Smack.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Smack.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Smack/Pods-Smack.debug.xcconfig"; sourceTree = "<group>"; };
 		85DDCCD86E5379196F2A2237 /* Pods_Smack.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Smack.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -125,6 +127,7 @@
 				2B86D7402006D81700BABE41 /* CircleImage.swift */,
 				2BEEB58B200A75C10086F1AE /* ChannelCell.swift */,
 				2BEEB595200AF5510086F1AE /* KeyboardBoundView.swift */,
+				2BEEB597200AFBBD0086F1AE /* MessageCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -372,6 +375,7 @@
 				2BB32BC22004289A00E63042 /* AppDelegate.swift in Sources */,
 				2B86D73F2006CA8300BABE41 /* AvatarCell.swift in Sources */,
 				2B7F1FB6200449850011B32C /* SWRevealViewController.m in Sources */,
+				2BEEB598200AFBBD0086F1AE /* MessageCell.swift in Sources */,
 				2B3425E7200682CF00640C68 /* UserDataService.swift in Sources */,
 				2B777F152005217000AB2233 /* Constants.swift in Sources */,
 			);
