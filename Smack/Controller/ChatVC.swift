@@ -13,9 +13,13 @@ class ChatVC: UIViewController {
     
     @IBOutlet weak var channelNameLbl: UILabel!
     @IBOutlet weak var menuBtn: UIButton!
+    @IBOutlet weak var messageTxtBox: UITextField!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        view.bindToKeyboard()
+        let tap = UITapGestureRecognizer(target: self, action: #selector(ChatVC.handleTap))
+        view.addGestureRecognizer(tap)
             //buttonAction
         menuBtn.addTarget(self.revealViewController(), action: #selector(SWRevealViewController.revealToggle(_:)), for: .touchUpInside)
         
@@ -68,7 +72,7 @@ class ChatVC: UIViewController {
                 if MessageService.instance.channels.count > 0   {
                         //
                     MessageService.instance.selectedChannel = MessageService.instance.channels[0]
-                    updateWithChannel()
+                    self.updateWithChannel()
                 }else   {
                     self.channelNameLbl.text = "No channels yet!"
                 }
@@ -83,5 +87,24 @@ class ChatVC: UIViewController {
         }
     }
     
+    //Selector Method
+    @objc func handleTap()  {
+        view.endEditing(true)
+    }
+    
+    @IBAction func sendMsgPressed(_ sender: UIButton) {
+        if AuthService.instance.isLoggedIn  {
+            //
+            guard let channelId = MessageService.instance.selectedChannel?.id else { return }
+            guard let message = messageTxtBox.text else { return }
+            
+            SocketService.instance.addMessage(messageBody: message, userId: UserDataService.instance.id, channelId: channelId, completion: { (success) in
+                if success  {
+                    self.messageTxtBox.text = ""
+                    self.messageTxtBox.resignFirstResponder()
+                }
+                })
+        }
+    }
 
 }
