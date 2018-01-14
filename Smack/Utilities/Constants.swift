@@ -11,6 +11,8 @@ import Foundation
 //Completion Handler
 typealias CompletionHandler = (_ Success: Bool) -> ()
 
+typealias  = <#type expression#>
+
 //URL Constants
 let BASE_URL = "https://smachat.herokuapp.com/"
 let URL_REGISTER = "\(BASE_URL)account/register"

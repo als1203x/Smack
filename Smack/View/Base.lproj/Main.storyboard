@@ -666,14 +666,22 @@
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tmL-yC-cAE">
+                                <rect key="frame" x="8" y="621" width="0.0" height="0.0"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
+                                <color key="textColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="ovd-hM-qnf" firstAttribute="top" secondItem="vVU-0s-dlr" secondAttribute="top" id="6Is-He-Exe"/>
+                            <constraint firstItem="tmL-yC-cAE" firstAttribute="leading" secondItem="JL3-Br-lKa" secondAttribute="leading" constant="8" id="6Pz-oJ-gl6"/>
                             <constraint firstItem="Jpl-zw-WWL" firstAttribute="top" secondItem="ovd-hM-qnf" secondAttribute="bottom" id="AGY-OQ-ZuT"/>
                             <constraint firstItem="ovd-hM-qnf" firstAttribute="leading" secondItem="JL3-Br-lKa" secondAttribute="leading" id="Uaf-Hs-97j"/>
                             <constraint firstItem="eW1-Et-nUT" firstAttribute="bottom" secondItem="JL3-Br-lKa" secondAttribute="bottom" id="Wnw-t0-5JQ"/>
                             <constraint firstItem="Jpl-zw-WWL" firstAttribute="leading" secondItem="JL3-Br-lKa" secondAttribute="leading" id="Xl8-oc-1k2"/>
+                            <constraint firstItem="eW1-Et-nUT" firstAttribute="top" secondItem="tmL-yC-cAE" secondAttribute="bottom" constant="6" id="hld-UI-AqR"/>
                             <constraint firstItem="eW1-Et-nUT" firstAttribute="leading" secondItem="JL3-Br-lKa" secondAttribute="leading" id="i6R-mG-ycN"/>
                             <constraint firstItem="JL3-Br-lKa" firstAttribute="trailing" secondItem="ovd-hM-qnf" secondAttribute="trailing" id="j2b-IM-4al"/>
                             <constraint firstItem="n5s-9d-sPn" firstAttribute="centerY" secondItem="eW1-Et-nUT" secondAttribute="centerY" id="jMU-a8-cHH"/>
@@ -690,6 +698,7 @@
                         <outlet property="messageTxtBox" destination="eW1-Et-nUT" id="YJl-6H-erf"/>
                         <outlet property="sendBtn" destination="n5s-9d-sPn" id="Rsv-c5-eac"/>
                         <outlet property="tableView" destination="Jpl-zw-WWL" id="c2o-tm-G2U"/>
+                        <outlet property="typingUsersLbl" destination="tmL-yC-cAE" id="0cX-Va-gc8"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="LlX-pG-Fwt" userLabel="First Responder" sceneMemberID="firstResponder"/>
