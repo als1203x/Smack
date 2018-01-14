@@ -26,6 +26,8 @@ let smackPurple = #colorLiteral(red: 0.3266413212, green: 0.4215201139, blue: 0.
 //Notification Constants
     //name of notif, each name is similar to a specfic radio channel
 let NOTIF_USER_DATA_DID_CHANGE = Notification.Name("notifUserDataChnaged")
+let NOTIF_CHANNELS_LOADED = Notification.Name("channelsLoaded")
+let NOTIF_CHANNEL_SELECTED = Notification.Name("channelSelected")
 
 
 //Segues
