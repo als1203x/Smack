@@ -55,15 +55,33 @@ class ChatVC: UIViewController {
     func updateWithChannel() {
         let channelName = MessageService.instance.selectedChannel?.channelTitle ?? ""
         channelNameLbl.text = channelName
+        getMessages()
         
     }
     
+        //on Login What happens
     func onLoginGetMessages()   {
         MessageService.instance.findAllChannel { (success) in
             if success  {
-                //Do stuff with 
+                //Do stuff with channels
+                //check if there are any channels
+                if MessageService.instance.channels.count > 0   {
+                        //
+                    MessageService.instance.selectedChannel = MessageService.instance.channels[0]
+                    updateWithChannel()
+                }else   {
+                    self.channelNameLbl.text = "No channels yet!"
+                }
             }
         }
     }
+    
+    func getMessages()  {
+        guard let channelId = MessageService.instance.selectedChannel?.id else  { return }
+        MessageService.instance.findAllMessagesForChannel(channelId: channelId) { (success) in
+            //Do stuff with the messges
+        }
+    }
+    
 
 }

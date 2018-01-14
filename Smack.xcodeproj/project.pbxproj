@@ -32,6 +32,7 @@
 		2BEEB58F200A7C690086F1AE /* AddChannelVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BEEB58D200A7C690086F1AE /* AddChannelVC.swift */; };
 		2BEEB590200A7C690086F1AE /* AddChannelVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2BEEB58E200A7C690086F1AE /* AddChannelVC.xib */; };
 		2BEEB592200AA9320086F1AE /* SocketService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BEEB591200AA9320086F1AE /* SocketService.swift */; };
+		2BEEB594200AE9850086F1AE /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BEEB593200AE9850086F1AE /* Message.swift */; };
 		90AFB6DF3A4493B31A2C32BF /* Pods_Smack.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 85DDCCD86E5379196F2A2237 /* Pods_Smack.framework */; };
 /* End PBXBuildFile section */
 
@@ -66,6 +67,7 @@
 		2BEEB58D200A7C690086F1AE /* AddChannelVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddChannelVC.swift; sourceTree = "<group>"; };
 		2BEEB58E200A7C690086F1AE /* AddChannelVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AddChannelVC.xib; sourceTree = "<group>"; };
 		2BEEB591200AA9320086F1AE /* SocketService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocketService.swift; sourceTree = "<group>"; };
+		2BEEB593200AE9850086F1AE /* Message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
 		75B5D4C438EABF521A92318A /* Pods-Smack.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Smack.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Smack/Pods-Smack.debug.xcconfig"; sourceTree = "<group>"; };
 		85DDCCD86E5379196F2A2237 /* Pods_Smack.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Smack.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -187,6 +189,7 @@
 			isa = PBXGroup;
 			children = (
 				2BEEB589200A535B0086F1AE /* Channel.swift */,
+				2BEEB593200AE9850086F1AE /* Message.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -352,6 +355,7 @@
 				2B86D73D2006C87900BABE41 /* AvatarPickerVC.swift in Sources */,
 				2B1522982009CA4600A73E3E /* ProfileVC.swift in Sources */,
 				2B3425E52005AE2400640C68 /* RoundedButton.swift in Sources */,
+				2BEEB594200AE9850086F1AE /* Message.swift in Sources */,
 				2BEEB58A200A535B0086F1AE /* Channel.swift in Sources */,
 				2B86D7412006D81700BABE41 /* CircleImage.swift in Sources */,
 				2BEEB585200A51E80086F1AE /* MessageService.swift in Sources */,
