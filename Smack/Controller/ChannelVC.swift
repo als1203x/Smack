@@ -40,7 +40,7 @@ class ChannelVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
         
         SocketService.instance.getChatMessage { (newMessage) in
             if newMessage.channelId != MessageService.instance.selectedChannel?.id && AuthService.instance.isLoggedIn   {
-                MessageService.instance.unreadChannels.append(newMessage)
+                MessageService.instance.unreadChannels.append(newMessage.channelId)
                 self.tableView.reloadData()
             }
         }

@@ -35,6 +35,7 @@ class AuthService   {
             defaults.set(newValue, forKey: TOKEN_KEY)
         }
     }
+    
     var userEmail: String {
         get {
             return defaults.value(forKey: USER_EMAIL) as! String
@@ -82,21 +83,15 @@ class AuthService   {
             (response) in
             
             if response.result.error == nil {
-             /*
-                if let json = response.result.value as? Dictionary<String, Any> {
-                    if let email = json["user"] as? String  {
-                        self.userEmail = email
-                    }
-                    if let token = json["token"] as? String {
-                        self.authToken = token
-                    }
-                 }*/
                  // Using SwiftyJSON
                 guard let data = response.data else { return }
-                let json = JSON(data)
-                self.userEmail = json["user"].stringValue
-                self.authToken = json["token"].stringValue
-                
+                do  {
+                    let json = try JSON(data: data)
+                    self.userEmail = json["user"].stringValue
+                    self.authToken = json["token"].stringValue
+                }catch  {
+                    debugPrint(error)
+                }
                 self.isLoggedIn = true
                 completion(true)
             }else   {
@@ -118,7 +113,6 @@ class AuthService   {
             "avatarColor": avatarColor
         ]
         
-       
         Alamofire.request(URL_USER_ADD, method: .post, parameters: body, encoding: JSONEncoding.default, headers: BEARER_HEADER).responseJSON  {
             (response) in
             
@@ -151,14 +145,17 @@ class AuthService   {
     }
     
     func setUserInfo(data: Data)    {
-        let json = JSON(data)
-        let id = json["_id"].stringValue
-        let color = json["avatarColor"].stringValue
-        let avatarName = json["avatarName"].stringValue
-        let email = json["email"].stringValue
-        let name = json["name"].stringValue
-        
-        UserDataService.instance.setUserData(id: id, color: color, avatarName: avatarName, email: email, name: name)
+        do  {
+            let json = try JSON(data: data)
+            let id = json["_id"].stringValue
+            let color = json["avatarColor"].stringValue
+            let avatarName = json["avatarName"].stringValue
+            let email = json["email"].stringValue
+            let name = json["name"].stringValue
+            UserDataService.instance.setUserData(id: id, color: color, avatarName: avatarName, email: email, name: name)
+        }catch  {
+            debugPrint(error)
+        }
     }
     
 }

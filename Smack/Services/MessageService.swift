@@ -27,19 +27,23 @@ class MessageService {
             
             if response.result.error == nil {
                 guard let data = response.data else {return}
-                if let json = JSON(data).array    {
-                    for item in json {
-                        let name = item["name"].stringValue
-                        let channelDescription = item["description"].stringValue
-                        let id = item["_id"].stringValue
-                        
-                        let channel = Channel(channelTitle: name, ChannelDescription: channelDescription, id: id)
-                        self.channels.append(channel)
+                do  {
+                    if let json = try JSON(data: data).array    {
+                        for item in json {
+                            let name = item["name"].stringValue
+                            let channelDescription = item["description"].stringValue
+                            let id = item["_id"].stringValue
+                            
+                            let channel = Channel(channelTitle: name, ChannelDescription: channelDescription, id: id)
+                            self.channels.append(channel)
+                        }
                     }
+                }catch  {
+                    debugPrint(error)
+                }
                     NotificationCenter.default.post(name: NOTIF_CHANNELS_LOADED, object: nil)
                     completion(true)
-                }
-            }else{
+            }else   {
                 completion(false)
                 debugPrint(response.error as Any)
             }
@@ -54,25 +58,29 @@ class MessageService {
             if response.result.error == nil {
                 self.clearMessages()
                 guard let data = response.data else { return }
-                if let json = JSON(data).array  {
-                    for item in json    {
-                        let messageBody = item["messageBody"].stringValue
-                        let channelId = item["channelId"].stringValue
-                        let id = item["_id"].stringValue
-                        let userName = item["userName"].stringValue
-                        let userAvatar = item["userAvatar"].stringValue
-                        let userAvatarColor = item["userAvatarColor"].stringValue
-                        let timeStamp = item["timeStamp"].stringValue
+                do  {
+                    if let json = try JSON(data: data).array  {
+                        for item in json    {
+                            let messageBody = item["messageBody"].stringValue
+                            let channelId = item["channelId"].stringValue
+                            let id = item["_id"].stringValue
+                            let userName = item["userName"].stringValue
+                            let userAvatar = item["userAvatar"].stringValue
+                            let userAvatarColor = item["userAvatarColor"].stringValue
+                            let timeStamp = item["timeStamp"].stringValue
 
-                        let message = Message(messageBody: messageBody, userName: userName, channelId: channelId, userAvatar: userAvatar, userAvatarColor: userAvatarColor, id: id, timeStamp: timeStamp)
-                        self.messages.append(message)
-                        
+                            let message = Message(messageBody: messageBody, userName: userName, channelId: channelId, userAvatar: userAvatar, userAvatarColor: userAvatarColor, id: id, timeStamp: timeStamp)
+                            self.messages.append(message)
+                            
+                        }
                     }
+                }catch  {
+                    debugPrint(error)
                 }
                 completion(true)
             }else   {
+                 completion(false)
                 debugPrint(response.result.error as Any)
-                completion(false)
             }
         }
     }
