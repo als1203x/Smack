@@ -50,13 +50,18 @@ class ChannelVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
         setUpUserInfo()
     }
     
+    
     func setUpUserInfo()    {
         if AuthService.instance.isLoggedIn  {
             loginBtn.setTitle(UserDataService.instance.name, for: .normal)
             //change userImage
             userImg.image = UIImage(named: UserDataService.instance.avatarName)
             userImg.backgroundColor = UserDataService.instance.returnUIColor(components: UserDataService.instance.avatarColor)
+            MessageService.instance.findAllChannel(completion: { (success) in
+                self.tableView.reloadData()
+            })
         }else   {
+            MessageService.instance.channels = [Channel]()
             loginBtn.setTitle("Login", for: .normal)
             userImg.image = UIImage(named: "menuProfileIcon")
             userImg.backgroundColor = UIColor.clear

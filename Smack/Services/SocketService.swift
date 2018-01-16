@@ -19,7 +19,8 @@ class SocketService: NSObject {
     }
     
     //create Socket
-    var socket =  SocketManager(socketURL: URL(string: BASE_URL)!).defaultSocket
+    var socket =  SocketManager(socketURL: URL(string: BASE_URL)!, config: [.log(true), .compress]).defaultSocket
+    
     
         //connects to server
     func establishConnection()  {

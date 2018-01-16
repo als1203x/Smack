@@ -42,10 +42,10 @@ class CreateAccountVC: UIViewController {
     
     func setUpView()    {
             //placeholder text color
+        spinner.isHidden = true
         usernameTxt.attributedPlaceholder = NSAttributedString(string: "username", attributes: [NSAttributedStringKey.foregroundColor: smackPurple])
         passwordTxt.attributedPlaceholder = NSAttributedString(string: "password", attributes: [NSAttributedStringKey.foregroundColor: smackPurple])
         emailTxt.attributedPlaceholder = NSAttributedString(string: "email", attributes: [NSAttributedStringKey.foregroundColor: smackPurple])
-        spinner.isHidden = true
         
         //tap Gesture Recognizer
         let tap = UITapGestureRecognizer(target: self, action: #selector(CreateAccountVC.handleTap))
@@ -63,9 +63,9 @@ class CreateAccountVC: UIViewController {
     }
 
     @IBAction func pickBGColorPressed(_ sender: Any) {
-        let r = CGFloat( arc4random_uniform(255) / 255 )
-        let g = CGFloat( arc4random_uniform(255) / 255 )
-        let b = CGFloat( arc4random_uniform(255) / 255 )
+        let r = CGFloat( arc4random_uniform(255)) / 255
+        let g = CGFloat( arc4random_uniform(255)) / 255
+        let b = CGFloat( arc4random_uniform(255)) / 255
         bgColor = UIColor(red: r, green: g, blue: b, alpha: 1)
         avatarColor = "[\(r), \(g), \(b), 1]"
         UIView.animate(withDuration: 0.2)   {
@@ -86,8 +86,7 @@ class CreateAccountVC: UIViewController {
         guard let email = emailTxt.text , emailTxt.text != "" else { return }
         guard let password = passwordTxt.text, passwordTxt.text != ""  else { return }
         
-        AuthService.instance.registerUser(email: email, password: password)
-            { (success) in
+        AuthService.instance.registerUser(email: email, password: password) { (success) in
                 if success  {
                     AuthService.instance.loginUser(email: email, password: password, completion: {(success) in
                         if success  {
