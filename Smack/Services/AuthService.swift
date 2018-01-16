@@ -29,7 +29,7 @@ class AuthService   {
     
     var authToken: String {
         get {
-            return defaults.value(forKey: TOKEN_KEY) as! String
+            return defaults.value(forKey: TOKEN_KEY) as? String ?? ""
         }
         set {
             defaults.set(newValue, forKey: TOKEN_KEY)
@@ -37,7 +37,7 @@ class AuthService   {
     }
     var userEmail: String {
         get {
-            return defaults.value(forKey: USER_EMAIL) as! String
+            return defaults.value(forKey: USER_EMAIL) as? String ?? ""
         }
         set {
             defaults.set(newValue, forKey: USER_EMAIL)
@@ -82,23 +82,18 @@ class AuthService   {
             (response) in
             
             if response.result.error == nil {
-             /*
-                if let json = response.result.value as? Dictionary<String, Any> {
-                    if let email = json["user"] as? String  {
-                        self.userEmail = email
-                    }
-                    if let token = json["token"] as? String {
-                        self.authToken = token
-                    }
-                 }*/
                  // Using SwiftyJSON
                 guard let data = response.data else { return }
-                let json = JSON(data)
-                self.userEmail = json["user"].stringValue
-                self.authToken = json["token"].stringValue
+                do  {
+                    let json = try JSON(data:data)
+                    self.userEmail = json["user"].stringValue
+                    self.authToken = json["token"].stringValue
                 
-                self.isLoggedIn = true
-                completion(true)
+                    self.isLoggedIn = true
+                    completion(true)
+                }catch{
+                    debugPrint(error)
+                }
             }else   {
                 completion(false)
                 debugPrint(response.result.error as Any)
@@ -151,14 +146,17 @@ class AuthService   {
     }
     
     func setUserInfo(data: Data)    {
-        let json = JSON(data)
+        do  {
+            let json = try JSON(data:  data)
         let id = json["_id"].stringValue
         let color = json["avatarColor"].stringValue
         let avatarName = json["avatarName"].stringValue
         let email = json["email"].stringValue
         let name = json["name"].stringValue
-        
         UserDataService.instance.setUserData(id: id, color: color, avatarName: avatarName, email: email, name: name)
+        }catch  {
+                debugPrint(error)
+        }
     }
     
 }
