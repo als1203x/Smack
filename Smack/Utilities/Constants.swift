@@ -23,7 +23,7 @@ let URL_GET_MESSAGES = "\(BASE_URL)message/byChannel/"
 
 
 //Colors
-let smackPurple = #colorLiteral(red: 0.3266413212, green: 0.4215201139, blue: 0.7752227187, alpha: 0.5)
+let smackPurplePlaceholder = #colorLiteral(red: 0.3266413212, green: 0.4215201139, blue: 0.7752227187, alpha: 0.5)
 
 //Notification Constants
     //name of notif, each name is similar to a specfic radio channel
@@ -52,9 +52,7 @@ let USER_EMAIL = "userEmail"
 //headers
 
     //header -- attachment of type of content
-let HEADER = [
-    "Content-Type": "application/json; charset=utf-8"
-]
+let HEADER = ["Content-Type": "application/json; charset=utf-8"]
 
 let BEARER_HEADER = [
     "Authorization": "Bearer \(AuthService.instance.authToken)",

@@ -23,15 +23,15 @@ class UserDataService   {
         self.id = id
         self.avatarColor = color
         self.avatarName = avatarName
+        self.email = email
         self.name = name
-        self.email = name
     }
 
     func setAvatarName(avatarName: String)  {
         self.avatarName = avatarName
     }
+
     func returnUIColor(components: String) -> UIColor   {
-        
             // scans over elements(string)
         let scanner = Scanner(string: components)
             //items in element to skip
@@ -40,6 +40,7 @@ class UserDataService   {
         scanner.charactersToBeSkipped = skipped
         
         var r, g, b, a : NSString?
+    
         scanner.scanUpToCharacters(from: comma, into: &r)
         scanner.scanUpToCharacters(from: comma, into: &g)
         scanner.scanUpToCharacters(from: comma, into: &b)
@@ -59,7 +60,6 @@ class UserDataService   {
         let aFloat = CGFloat(aUnwrapped.doubleValue)
         
         let newUIColor = UIColor(red: rFloat, green: gFloat, blue: bFloat, alpha: aFloat)
-        
         return newUIColor
     }
     
@@ -76,5 +76,4 @@ class UserDataService   {
         MessageService.instance.clearChannels()
         MessageService.instance.clearMessages()
     }
-    
 }

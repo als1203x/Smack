@@ -76,5 +76,4 @@ class AvatarPickerVC: UIViewController, UICollectionViewDelegate, UICollectionVi
         let cellDimesion = ((collectionView.bounds.width - padding) - (numberOFColumns - 1) * spaceBetweenCells) / numberOFColumns
         return CGSize(width: cellDimesion, height: cellDimesion)
     }
-    
 }

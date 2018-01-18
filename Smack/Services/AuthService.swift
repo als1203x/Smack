@@ -17,7 +17,8 @@ class AuthService   {
 
         //persistence data
     let defaults = UserDefaults.standard
-    
+
+    //Properties
     var isLoggedIn : Bool   {
         get {
             return defaults.bool(forKey: LOGGED_IN_KEY)
@@ -29,7 +30,7 @@ class AuthService   {
     
     var authToken: String {
         get {
-            return defaults.value(forKey: TOKEN_KEY) as? String ?? ""
+            return defaults.value(forKey: TOKEN_KEY) as! String
         }
         set {
             defaults.set(newValue, forKey: TOKEN_KEY)
@@ -38,23 +39,20 @@ class AuthService   {
     
     var userEmail: String {
         get {
-            return defaults.value(forKey: USER_EMAIL) as? String ?? ""
+            return defaults.value(forKey: USER_EMAIL) as! String
         }
         set {
             defaults.set(newValue, forKey: USER_EMAIL)
         }
     }
     
-    func registerUser(email: String, password: String, completion:
-        @escaping CompletionHandler)    {
+    //Register User
+    func registerUser(email: String, password: String, completion: @escaping CompletionHandler)    {
         
         let lowerCaseEmail = email.lowercased()
             //craft web request
         
-        let body: [String: Any] = [
-            "email": lowerCaseEmail,
-            "password": password
-        ]
+        let body: [String: Any] = [ "email": lowerCaseEmail, "password": password]
         
         Alamofire.request(URL_REGISTER, method: .post, parameters: body, encoding: JSONEncoding.default, headers: HEADER).responseString    {
             (response) in
@@ -69,8 +67,7 @@ class AuthService   {
     }
     
     //Login User
-    func loginUser(email: String, password: String, completion:
-        @escaping CompletionHandler)    {
+    func loginUser(email: String, password: String, completion: @escaping CompletionHandler)    {
         
         let lowerCaseEmail = email.lowercased()
         
@@ -89,11 +86,11 @@ class AuthService   {
                     let json = try JSON(data: data)
                     self.userEmail = json["user"].stringValue
                     self.authToken = json["token"].stringValue
+                    self.isLoggedIn = true
+                    completion(true)
                 }catch  {
                     debugPrint(error)
                 }
-                self.isLoggedIn = true
-                completion(true)
             }else   {
                 completion(false)
                 debugPrint(response.result.error as Any)
@@ -113,7 +110,7 @@ class AuthService   {
             "avatarColor": avatarColor
         ]
         
-        Alamofire.request(URL_USER_ADD, method: .post, parameters: body, encoding: JSONEncoding.default, headers: BEARER_HEADER).responseJSON  {
+        Alamofire.request(URL_USER_ADD, method: .post, parameters: body, encoding: JSONEncoding.default, headers: BEARER_HEADER).responseJSON {
             (response) in
             
             if response.result.error == nil {
@@ -152,10 +149,10 @@ class AuthService   {
             let avatarName = json["avatarName"].stringValue
             let email = json["email"].stringValue
             let name = json["name"].stringValue
+                //Set loggedIn UserData
             UserDataService.instance.setUserData(id: id, color: color, avatarName: avatarName, email: email, name: name)
         }catch  {
             debugPrint(error)
         }
     }
-    
 }

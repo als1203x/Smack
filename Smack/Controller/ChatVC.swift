@@ -26,62 +26,57 @@ class ChatVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
         view.bindToKeyboard()
         tableView.delegate = self
         tableView.dataSource = self
+        
             //Enable tableViewRow to Dynamically shift based on content
         tableView.estimatedRowHeight = 80
         tableView.rowHeight = UITableViewAutomaticDimension
+        
         sendBtn.isHidden = true
+        
+        //buttonAction
+        menuBtn.addTarget(self.revealViewController(), action: #selector(SWRevealViewController.revealToggle(_:)), for: .touchUpInside)
         
         let tap = UITapGestureRecognizer(target: self, action: #selector(ChatVC.handleTap))
         view.addGestureRecognizer(tap)
-            //buttonAction
-        menuBtn.addTarget(self.revealViewController(), action: #selector(SWRevealViewController.revealToggle(_:)), for: .touchUpInside)
         
             //reveal rear view upon pan or tap
         self.view.addGestureRecognizer(self.revealViewController().panGestureRecognizer())
         self.view.addGestureRecognizer(self.revealViewController().tapGestureRecognizer())
         
         NotificationCenter.default.addObserver(self, selector: #selector(ChatVC.userDataDidChange(_:)), name: NOTIF_USER_DATA_DID_CHANGE, object: nil)
-        
         NotificationCenter.default.addObserver(self, selector: #selector(ChatVC.channelSelected(_:)), name: NOTIF_CHANNEL_SELECTED, object: nil)
         
-        //Listener for Messages
-            
-        SocketService.instance.getChatMessage   { (newMessage) in
+            //Listener for Messages
+        SocketService.instance.getMessages   { (newMessage) in
             if newMessage.channelId == MessageService.instance.selectedChannel?.id && AuthService.instance.isLoggedIn   {
                 MessageService.instance.messages.append(newMessage)
                 self.tableView.reloadData()
                     // have screen scrool down to bottom of cell
                 if MessageService.instance.messages.count > 0 {
                     let endIndex = IndexPath(row: MessageService.instance.messages.count - 1, section: 0)
-                    self.tableView.scrollToRow(at: endIndex, at: .bottom, animated: true)
-                }            }
+                    self.tableView.scrollToRow(at: endIndex, at: .bottom, animated: false)
+                }
+            }
         }
-        //        SocketService.instance.getChatMessage { (success) in
-        //            if success  {
-        //                self.tableView.reloadData()
-        //                if MessageService.instance.messages.count > 0 {
-        //                    let endIndex = IndexPath(row: MessageService.instance.messages.count - 1, section: 0)
-        //                    self.tableView.scrollToRow(at: endIndex, at: .bottom , animated: true)
-        //                }
-        //            }
-        //        }
-        
+        //Listener for Users Typing
         SocketService.instance.getTypingUsers { (typingUsers) in
             guard let channelId = MessageService.instance.selectedChannel?.id else  { return }
             var names = ""
             var numberOfTypers = 0
             
             for (typingUser, channel) in typingUsers    {
-                //check to make sure typingUser is not displaying USER
+                    //check to make sure typingUser is not displaying USER
                 if typingUser != UserDataService.instance.name && channel == channelId  {
                     if names == ""  {
                         names = typingUser
+                        numberOfTypers += 1
                     }else   {
                         names = "\(names), \(typingUser)"
                     }
                     numberOfTypers += 1
                 }
             }
+            
             if numberOfTypers > 0 && AuthService.instance.isLoggedIn == true    {
                 var verb = "is"
                 if numberOfTypers > 1 {
@@ -96,20 +91,14 @@ class ChatVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
         if AuthService.instance.isLoggedIn  {
             AuthService.instance.findUserByEmail(completion: { (success) in
                 NotificationCenter.default.post(name: NOTIF_USER_DATA_DID_CHANGE, object: nil)
-                //Download Channels
-                MessageService.instance.findAllChannel { (success) in
-                    
-                }
             })
         }
-        
-        
     }
     
     @objc func userDataDidChange(_ notif: Notification) {
         if AuthService.instance.isLoggedIn  {
             //get Channels
-
+            onLoginGetMessages()
         }else{
             channelNameLbl.text = "Please Log In"
             tableView.reloadData()
@@ -121,10 +110,9 @@ class ChatVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     }
     
     func updateWithChannel() {
-        let channelName = MessageService.instance.selectedChannel?.channelTitle ?? ""
-        channelNameLbl.text = channelName
+        let channelName = MessageService.instance.selectedChannel?.title ?? ""
+        channelNameLbl.text = "#\(channelName)"
         getMessages()
-        
     }
     
         //on Login What happens
@@ -134,7 +122,6 @@ class ChatVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
                 //Do stuff with channels
                 //check if there are any channels
                 if MessageService.instance.channels.count > 0   {
-                        //
                     MessageService.instance.selectedChannel = MessageService.instance.channels[0]
                     self.updateWithChannel()
                 }else   {
@@ -169,7 +156,7 @@ class ChatVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
         }else   {
             if isTyping == false    {
                 sendBtn.isHidden = false
-            SocketService.instance.socket.emit("startType", UserDataService.instance.name, channelId)
+                SocketService.instance.socket.emit("startType", UserDataService.instance.name, channelId)
             }
             isTyping = true
         }
@@ -186,13 +173,13 @@ class ChatVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
                 if success  {
                     self.messageTxtBox.text = ""
                     self.messageTxtBox.resignFirstResponder()
+                    SocketService.instance.socket.emit("stopType", UserDataService.instance.name, channelId)
                 }
                 })
-            SocketService.instance.socket.emit("stopType", UserDataService.instance.name, channelId)
         }
     }
     
-    //TableView Delegate Methods
+    //TableView DataSource & Delegate Methods
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if let cell = tableView.dequeueReusableCell(withIdentifier: "messageCell", for: indexPath) as? MessageCell  {
             let message = MessageService.instance.messages[indexPath.row]
@@ -210,5 +197,4 @@ class ChatVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return MessageService.instance.messages.count
     }
-    
 }

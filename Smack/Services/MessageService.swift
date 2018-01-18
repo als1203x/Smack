@@ -34,22 +34,21 @@ class MessageService {
                             let channelDescription = item["description"].stringValue
                             let id = item["_id"].stringValue
                             
-                            let channel = Channel(channelTitle: name, ChannelDescription: channelDescription, id: id)
+                            let channel = Channel(title: name, description: channelDescription, id: id)
                             self.channels.append(channel)
                         }
+                        NotificationCenter.default.post(name: NOTIF_CHANNELS_LOADED, object: nil)
+                        completion(true)
                     }
                 }catch  {
                     debugPrint(error)
                 }
-                    NotificationCenter.default.post(name: NOTIF_CHANNELS_LOADED, object: nil)
-                    completion(true)
             }else   {
                 completion(false)
-                debugPrint(response.error as Any)
+                debugPrint(response.result.error as Any)
             }
         }
     }
-    
  
     //Find All Messages
     func findAllMessagesForChannel(channelId: String, completion: @escaping CompletionHandler)  {
@@ -57,6 +56,7 @@ class MessageService {
             
             if response.result.error == nil {
                 self.clearMessages()
+                
                 guard let data = response.data else { return }
                 do  {
                     if let json = try JSON(data: data).array  {
@@ -73,11 +73,11 @@ class MessageService {
                             self.messages.append(message)
                             
                         }
+                      completion(true)
                     }
                 }catch  {
                     debugPrint(error)
                 }
-                completion(true)
             }else   {
                  completion(false)
                 debugPrint(response.result.error as Any)
@@ -85,14 +85,13 @@ class MessageService {
         }
     }
     
-    
     //Clear Array for Channels for when user logs out
     func clearChannels()    {
         channels.removeAll()
     }
+    
     //Clear Array of Messages
     func clearMessages()    {
         messages.removeAll()
     }
-    
 }

@@ -119,7 +119,6 @@
 		2B9131952004506B00AFB2F0 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				2BB32BC52004289A00E63042 /* Main.storyboard */,
 				2BB32BCA2004289A00E63042 /* LaunchScreen.storyboard */,
 				2B9131A22004687600AFB2F0 /* GradientView.swift */,
 				2B3425E42005AE2400640C68 /* RoundedButton.swift */,
@@ -167,13 +166,14 @@
 		2BB32BC02004289A00E63042 /* Smack */ = {
 			isa = PBXGroup;
 			children = (
-				2BB32BC12004289A00E63042 /* AppDelegate.swift */,
 				2BEEB588200A52FE0086F1AE /* Model */,
 				2B3425E12005A22E00640C68 /* Services */,
 				2B777F132005213D00AB2233 /* Utilities */,
 				2B9131952004506B00AFB2F0 /* View */,
 				2B9131962004508300AFB2F0 /* Controller */,
 				2B22256D2009D7F0007E2AC9 /* XIBs */,
+				2BB32BC12004289A00E63042 /* AppDelegate.swift */,
+				2BB32BC52004289A00E63042 /* Main.storyboard */,
 				2BB32BC82004289A00E63042 /* Assets.xcassets */,
 				2BB32BCD2004289A00E63042 /* Info.plist */,
 				2BB32BD320042E9400E63042 /* Supporting Files */,

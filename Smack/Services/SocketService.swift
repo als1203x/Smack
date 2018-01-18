@@ -14,13 +14,12 @@ class SocketService: NSObject {
 
     static let instance = SocketService()
     
+    //create Socket
+    var socket : SocketIOClient =  SocketManager(socketURL: URL(string: BASE_URL)!, config: [.log(true), .compress]).defaultSocket
+    
     override init() {
         super.init()
     }
-    
-    //create Socket
-    var socket =  SocketManager(socketURL: URL(string: BASE_URL)!, config: [.log(true), .compress]).defaultSocket
-    
     
         //connects to server
     func establishConnection()  {
@@ -33,8 +32,8 @@ class SocketService: NSObject {
     
         // .emit -- when something is being sent from or to server
         // recieve information .on
-    func addChannel(channelName: String, channelDescription: String, completion: @escaping CompletionHandler)   {
-        socket.emit("newChannel", channelName, channelDescription)
+    func addChannel(name: String, description: String, completion: @escaping CompletionHandler)   {
+        socket.emit("newChannel", name, description)
         completion(true)
     }
  
@@ -46,7 +45,7 @@ class SocketService: NSObject {
             guard let channelDesc = dataArray[1] as? String else { return }
             guard let channelId = dataArray[2] as? String else { return }
         
-            let newChannel = Channel(channelTitle: channelName, ChannelDescription: channelDesc, id: channelId)
+            let newChannel = Channel(title: channelName, description: channelDesc, id: channelId)
             MessageService.instance.channels.append(newChannel)
             completion(true)
         }
@@ -60,7 +59,7 @@ class SocketService: NSObject {
     }
     
         //Listener for Messages
-    func getChatMessage(completion: @escaping (_ newMessage: Message ) -> Void)    {
+    func getMessages(completion: @escaping (_ newMessage: Message ) -> Void)    {
         socket.on("messageCreated") {   (dataArray, ack) in
                 //if MessageService.instance.selectedChannel ==
             guard let messageBody = dataArray[0] as? String else { return }
@@ -80,10 +79,5 @@ class SocketService: NSObject {
             guard let typingUsers = dataArray[0] as? [String: String] else { return }
             completionHandler(typingUsers)
         }
-        
     }
-    
-    
-    
-    
 }

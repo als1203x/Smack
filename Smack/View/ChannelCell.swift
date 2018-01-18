@@ -28,7 +28,7 @@ class ChannelCell: UITableViewCell {
 
     
     func configureCell(channel: Channel)    {
-        let title = channel.channelTitle ?? ""
+        let title = channel.title ?? ""
         channelName.text = "#\(title)"
         channelName.font = UIFont(name: "HelveticaNeue-Regular", size: 17)
         
@@ -38,5 +38,4 @@ class ChannelCell: UITableViewCell {
             }
         }
     }
-    
 }

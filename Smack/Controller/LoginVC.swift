@@ -22,7 +22,6 @@ class LoginVC: UIViewController {
     
 
     @IBAction func closePressed(_ sender: UIButton) {
-        
         dismiss(animated: true, completion: nil)
     }
    
@@ -34,17 +33,22 @@ class LoginVC: UIViewController {
         guard let password = passwordTxt.text, passwordTxt.text != "" else { return }
         
         AuthService.instance.loginUser(email: email, password: password) { (success) in
-            AuthService.instance.findUserByEmail(completion: { (success) in
-                if success  {
-                    // we have logged in
-                    NotificationCenter.default.post(name: NOTIF_USER_DATA_DID_CHANGE, object: nil)
-                    self.spinner.isHidden = true
-                    self.spinner.stopAnimating()
-                    self.dismiss(animated: true, completion: nil)
-                }
-            })
+            if success  {
+                AuthService.instance.findUserByEmail(completion: { (success) in
+                    if success  {
+                        // we have logged in
+                        NotificationCenter.default.post(name: NOTIF_USER_DATA_DID_CHANGE, object: nil)
+                        self.spinner.isHidden = true
+                        self.spinner.stopAnimating()
+                        self.dismiss(animated: true, completion: nil)
+                    }else   {
+                        // Handle Error
+                    }
+                })
+            }else  {
+                // Handle Error
+            }
         }
-        
     }
     
     @IBAction func createAccountPressed(_ sender: UIButton) {
@@ -53,9 +57,10 @@ class LoginVC: UIViewController {
     
     
     func setUpView()    {
+       spinner.isHidden = true
         //placeholder text color
-        userEmailTxt.attributedPlaceholder = NSAttributedString(string: "email", attributes: [NSAttributedStringKey.foregroundColor: smackPurple])
-        passwordTxt.attributedPlaceholder = NSAttributedString(string: "password", attributes: [NSAttributedStringKey.foregroundColor: smackPurple])
-        spinner.isHidden = true
+        userEmailTxt.attributedPlaceholder = NSAttributedString(string: "email", attributes: [NSAttributedStringKey.foregroundColor: smackPurplePlaceholder])
+        passwordTxt.attributedPlaceholder = NSAttributedString(string: "password", attributes: [NSAttributedStringKey.foregroundColor: smackPurplePlaceholder])
+        
     }
 }

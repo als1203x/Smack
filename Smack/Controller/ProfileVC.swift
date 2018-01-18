@@ -19,7 +19,6 @@ class ProfileVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setUpView()
-     
     }
 
 
@@ -47,6 +46,4 @@ class ProfileVC: UIViewController {
     @objc func closeTap(_ recognizer: UITapGestureRecognizer)   {
         dismiss(animated: true, completion: nil)
     }
-    
-    
 }

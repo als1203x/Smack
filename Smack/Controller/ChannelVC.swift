@@ -29,7 +29,7 @@ class ChannelVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
         self.revealViewController().rearViewRevealWidth = self.view.frame.size.width - 60
             // react to specfic notif
         NotificationCenter.default.addObserver(self, selector: #selector(ChannelVC.userDataDidChange(_:)), name: NOTIF_USER_DATA_DID_CHANGE, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(channelsLoaded(_:)), name: NOTIF_CHANNELS_LOADED, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(ChannelVC.channelsLoaded(_:)), name: NOTIF_CHANNELS_LOADED, object: nil)
         
             //Socket .on listner
         SocketService.instance.getChannel { (success) in
@@ -38,7 +38,7 @@ class ChannelVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
             }
         }
         
-        SocketService.instance.getChatMessage { (newMessage) in
+        SocketService.instance.getMessages { (newMessage) in
             if newMessage.channelId != MessageService.instance.selectedChannel?.id && AuthService.instance.isLoggedIn   {
                 MessageService.instance.unreadChannels.append(newMessage.channelId)
                 self.tableView.reloadData()
@@ -57,11 +57,7 @@ class ChannelVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
             //change userImage
             userImg.image = UIImage(named: UserDataService.instance.avatarName)
             userImg.backgroundColor = UserDataService.instance.returnUIColor(components: UserDataService.instance.avatarColor)
-            MessageService.instance.findAllChannel(completion: { (success) in
-                self.tableView.reloadData()
-            })
         }else   {
-            MessageService.instance.channels = [Channel]()
             loginBtn.setTitle("Login", for: .normal)
             userImg.image = UIImage(named: "menuProfileIcon")
             userImg.backgroundColor = UIColor.clear
@@ -124,7 +120,7 @@ class ChannelVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let channel = MessageService.instance.channels[indexPath.row]
         MessageService.instance.selectedChannel = channel
-     
+        
         if MessageService.instance.unreadChannels.count > 0 {
             MessageService.instance.unreadChannels = MessageService.instance.unreadChannels.filter({$0 != channel.id})
         }

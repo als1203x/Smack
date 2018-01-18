@@ -32,10 +32,10 @@ class CreateAccountVC: UIViewController {
         if UserDataService.instance.avatarName != ""    {
             userImg.image = UIImage(named: UserDataService.instance.avatarName)
             avatarName = UserDataService.instance.avatarName
-        }
         
-        if avatarName.contains("light") && bgColor == nil   {
-            userImg.backgroundColor = UIColor.lightGray
+            if avatarName.contains("light") && bgColor == nil   {
+                userImg.backgroundColor = UIColor.lightGray
+            }
         }
     }
     
@@ -43,9 +43,9 @@ class CreateAccountVC: UIViewController {
     func setUpView()    {
             //placeholder text color
         spinner.isHidden = true
-        usernameTxt.attributedPlaceholder = NSAttributedString(string: "username", attributes: [NSAttributedStringKey.foregroundColor: smackPurple])
-        passwordTxt.attributedPlaceholder = NSAttributedString(string: "password", attributes: [NSAttributedStringKey.foregroundColor: smackPurple])
-        emailTxt.attributedPlaceholder = NSAttributedString(string: "email", attributes: [NSAttributedStringKey.foregroundColor: smackPurple])
+        usernameTxt.attributedPlaceholder = NSAttributedString(string: "username", attributes: [NSAttributedStringKey.foregroundColor: smackPurplePlaceholder])
+        passwordTxt.attributedPlaceholder = NSAttributedString(string: "password", attributes: [NSAttributedStringKey.foregroundColor: smackPurplePlaceholder])
+        emailTxt.attributedPlaceholder = NSAttributedString(string: "email", attributes: [NSAttributedStringKey.foregroundColor: smackPurplePlaceholder])
         
         //tap Gesture Recognizer
         let tap = UITapGestureRecognizer(target: self, action: #selector(CreateAccountVC.handleTap))
