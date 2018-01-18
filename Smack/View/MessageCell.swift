@@ -27,6 +27,26 @@ class MessageCell: UITableViewCell {
         userNameLbl.text = message.userName
         userImg.image = UIImage(named: message.userAvatar)
         userImg.backgroundColor = UserDataService.instance.returnUIColor(components: message.userAvatarColor)
+     
+        //ISO 8601 -- Standard - how server returns dates and time
+            //Apple Formatter does not accept milliseconds
+        // 2017-07-13T21:49:25.5900Z
+        
+        guard var isoDate = message.timeStamp else { return }
+        let end = isoDate.index(isoDate.endIndex, offsetBy: -5) // end == milliseconds
+        isoDate = String(isoDate[..<end])
+        print(isoDate)
+        
+        let isoFormatter = ISO8601DateFormatter()
+        let msgDate = isoFormatter.date(from: isoDate.appending("Z"))
+        
+        let newFormatter = DateFormatter()
+        newFormatter.dateFormat = "MMM d, h:mm a"
+        
+        if let finalDate = msgDate  {
+            let finalDate = newFormatter.string(from: finalDate)
+            timeStamp.text = finalDate
+        }
         
     }
     
